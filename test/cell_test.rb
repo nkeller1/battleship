@@ -27,16 +27,18 @@ class CellTest < Minitest::Test
 
   end
 
-  # def test_if_cell_is_empty
-  #
-  #   assert_equal true, @cell.empty?
-  #
-  # end
-  #
-  # def test_cruiser_exists
-  #
-  #   assert_equal @cruiser, Ship.new("Cruiser")
-  #
-  # end
+  def test_if_cell_is_empty
+
+    assert_equal true, @cell.empty?
+
+  end
+
+  def test_place_ship_in_cell
+
+    @cell.place_ship(@cruiser)
+    assert_equal @cruiser, @cell.ship
+    assert_equal false, @cell.empty?
+
+  end
 
 end

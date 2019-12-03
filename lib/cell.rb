@@ -7,9 +7,14 @@ class Cell
 
   end
 
-#make cell.empty?
+  def empty?
+    @ship == nil
+  end
 
-  def place_ship(ship)
+  def place_ship(ship_arg)
+
+    @ship = ship_arg
+
   end
 
 end
