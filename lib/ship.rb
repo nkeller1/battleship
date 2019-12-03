@@ -13,8 +13,8 @@ class Ship
   end
 
   def sunk?
-    return true if health == 0
-    
+    return true if @health == 0
+
     @sunk
   end
 end
