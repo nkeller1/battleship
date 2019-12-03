@@ -21,8 +21,10 @@ class Cell
 
   def fire_upon
     @fired_upon = true
-    if @fired_upon == true && self.empty? == false
+    if empty? == false
       @ship.health -= 1
     end
   end
+
+
 end

@@ -43,7 +43,6 @@ class CellTest < Minitest::Test
 
 
   def test_cell_renders_correctly
-    skip
     assert_equal ".", @cell.render
     @cell.fire_upon
     assert_equal "M", @cell.render
