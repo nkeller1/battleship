@@ -5,3 +5,5 @@ class Board
 
 
 end
+
+Range
