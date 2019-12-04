@@ -25,7 +25,32 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
-  #gonna need a method that palces the ship in a range on cells 
+  def valid_placement?(ship, coordinates)
+    return false if ship.length != coordinates.length
+    valid_grid = valid_grid_allignment(coordinates)
+    valid_grid[:letters].uniq.length == 1 && sequential?(valid_grid[:numbers])
+  end
 
+  def valid_grid_allignment(coordinates)
+    letters = []
+    numbers = []
+    coordinates.each do |coordinate|
+      letters << coordinate.split(//).first.ord
+      numbers << coordinate.split(//).last.to_i
+    end
+    
+    {letters: letters, numbers: numbers}
+  end
+
+  def sequential?(array)
+    (array[0]..array[-1]).to_a == array
+  end
+
+
+
+  #gonna need a method that palces the ship in a range on cells
+  # def place_ship_on_board(ship, coordinates)
+  #
+  # end
 
 end

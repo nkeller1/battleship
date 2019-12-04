@@ -29,7 +29,7 @@ class BoardTest < Minitest::Test
     assert_instance_of Cell, @board.cells.values.first
   end
 
-  def test_test_valid_coordinate
+  def test_valid_coordinate
     assert_equal true, @board.valid_coordinate?("A1")
     assert_equal true, @board.valid_coordinate?("D4")
     assert_equal false, @board.valid_coordinate?("A5")
@@ -40,11 +40,15 @@ class BoardTest < Minitest::Test
   end
 
   def test_that_coordinate_length_is_valid_based_on_ship_length
-    require "pry"; binding.pry
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
     assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
     assert_equal true, @board.valid_placement?(@cruiser, ["A2", "A3", "A4"])
     assert_equal true, @board.valid_placement?(@submarine, ["A1", "A2"])
+  end
+
+  def test_valid_grid_allignment
+    hash = {letters: [65, 65, 65], numbers: [1, 2, 3]}
+    assert_equal hash, @board.valid_grid_allignment(["A1", "A2", "A3"])
   end
 
   def test_consecutive_ship_placement
@@ -55,8 +59,13 @@ class BoardTest < Minitest::Test
   end
 
   def test_non_diagonal_ship_placement
-    assert_equal true, @board.valid_placement?(@cruiser, ["A1", "B2", "C3"])
-    assert_equal true, @board.valid_placement?(@submarine, ["C2", "D3"])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "B2", "C3"])
+    assert_equal false, @board.valid_placement?(@submarine, ["C2", "D3"])
   end
+
+  # def test_place_ship_on_board
+  #
+  #   assert_equal [], @board.place_ship_on_board(@cruiser, [@board.cells["A1"], @board.cells["A2"], @board.cells["A3"]])
+  # end
 
 end
