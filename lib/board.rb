@@ -27,10 +27,8 @@ class Board
 
   def valid_placement?(ship, coordinates)
     return false if ship.length != coordinates.length
-
     valid_grid = valid_grid_allignment(coordinates)
     valid_grid[:letters].uniq.length == 1 && sequential?(valid_grid[:numbers])
-
   end
 
   def valid_grid_allignment(coordinates)
@@ -40,15 +38,12 @@ class Board
       letters << coordinate.split(//).first.ord
       numbers << coordinate.split(//).last.to_i
     end
-
+    
     {letters: letters, numbers: numbers}
-
-    # (numbers[0]..numbers[-1]).to_a == numbers && letters.uniq.length == 1)
   end
 
   def sequential?(array)
     (array[0]..array[-1]).to_a == array
-    # require "pry"; binding.pry
   end
 
 
