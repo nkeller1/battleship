@@ -47,9 +47,8 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_grid_allignment
-    expected = { letters: [65, 65, 65], numbers: [1, 2, 3]}
-
-    assert_equal expected, @board.valid_grid_allignment(["A1", "A2", "A3"])
+    hash = {letters: [65, 65, 65], numbers: [1, 2, 3]}
+    assert_equal hash, @board.valid_grid_allignment(["A1", "A2", "A3"])
   end
 
   def test_consecutive_ship_placement

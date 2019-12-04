@@ -38,8 +38,8 @@ class Board
       letters << coordinate.split(//).first.ord
       numbers << coordinate.split(//).last.to_i
     end
-
-    { letters: letters, numbers: numbers}
+    
+    {letters: letters, numbers: numbers}
   end
 
   def sequential?(array)
