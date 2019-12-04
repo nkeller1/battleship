@@ -46,12 +46,9 @@ class BoardTest < Minitest::Test
     assert_equal true, @board.valid_placement?(@submarine, ["A1", "A2"])
   end
 
-  def test_split_by_length
-    hash = {
-      letters: [65, 65, 65],
-      numbers: [1, 2, 3]
-    }
-    assert_equal hash, @board.split_by_length(["A1", "A2", "A3"])
+  def test_valid_grid_allignment
+    hash = {letters: [65, 65, 65], numbers: [1, 2, 3]}
+    assert_equal hash, @board.valid_grid_allignment(["A1", "A2", "A3"])
   end
 
   def test_consecutive_ship_placement
@@ -61,10 +58,10 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_placement?(@submarine, ["C1", "B1"])
   end
   #
-  # def test_non_diagonal_ship_placement
-  #   assert_equal true, @board.valid_placement?(@cruiser, ["A1", "B2", "C3"])
-  #   assert_equal true, @board.valid_placement?(@submarine, ["C2", "D3"])
-  # end
+  def test_non_diagonal_ship_placement
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "B2", "C3"])
+    assert_equal false, @board.valid_placement?(@submarine, ["C2", "D3"])
+  end
 
   # def test_place_ship_on_board
   #
