@@ -25,6 +25,7 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
+  #gonna need a method that palces the ship in a range on cells 
 
 
 end
