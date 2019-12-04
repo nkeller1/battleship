@@ -25,7 +25,42 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
-  #gonna need a method that palces the ship in a range on cells 
+  def valid_placement?(ship, coordinates)
+    return false if ship.length != coordinates.length
+    x = split_by_length(coordinates)
+    x[:letters].uniq == 1 && sequential?(x[:numbers])
+    x[:numbers].uniq == 1 && sequential?(x[:letters])
+    require "pry"; binding.pry
+    # return false if coordinates
+    true
+  end
 
+  def split_by_length(coordinates)
+    letters = []
+    numbers = []
+    coordinates.each do |coordinate|
+      letters << coordinate.split(//).first.ord
+      numbers << coordinate.split(//).last.to_i
+    end
+
+    {
+      letters: letters,
+      numbers: numbers
+    }
+
+    # (numbers[0]..numbers[-1]).to_a == numbers && letters.uniq.length == 1)
+  end
+
+  def sequential?(array)
+    require "pry"; binding.pry
+    (array[0]..array[-1]).to_a == array
+  end
+
+
+
+  #gonna need a method that palces the ship in a range on cells
+  # def place_ship_on_board(ship, coordinates)
+  #
+  # end
 
 end
