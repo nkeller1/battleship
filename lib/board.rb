@@ -60,20 +60,12 @@ class Board
     end
   end
 
-  def render(player = false)
-    cells_on_a = @cells.keys[0..3].map { |coordinate|  @cells[coordinate].render }
-    cells_on_b = @cells.keys[4..7].map { |coordinate|  @cells[coordinate].render }
-    cells_on_c = @cells.keys[8..11].map { |coordinate|  @cells[coordinate].render }
-    cells_on_d = @cells.keys[12..15].map { |coordinate|  @cells[coordinate].render }
+  def render(show_ships = false)
+    cells_on_a = @cells.keys[0..3].map { |coordinate|  @cells[coordinate].render(show_ships) }
+    cells_on_b = @cells.keys[4..7].map { |coordinate|  @cells[coordinate].render(show_ships) }
+    cells_on_c = @cells.keys[8..11].map { |coordinate|  @cells[coordinate].render(show_ships) }
+    cells_on_d = @cells.keys[12..15].map { |coordinate|  @cells[coordinate].render(show_ships) }
 
-    # x =cells_on_a.map do |coordinate|
-    #   @cells[coordinate].render
-
-    x = "  1 2 3 4 \n" + "A #{cells_on_a.join(" ")} \n" + "B #{cells_on_b.join(" ")} \n" + "C #{cells_on_c.join(" ")} \n" + "D #{cells_on_d.join(" ")} \n"
-   x
-    # require "pry"; binding.pry
-    #find range of cells we are to work over
-    #want to render each individual cell, using cell.render method
-
+    "  1 2 3 4 \n" + "A #{cells_on_a.join(" ")} \n" + "B #{cells_on_b.join(" ")} \n" + "C #{cells_on_c.join(" ")} \n" + "D #{cells_on_d.join(" ")} \n"
   end
 end
