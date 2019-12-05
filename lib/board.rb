@@ -61,9 +61,15 @@ class Board
   end
 
   def render(player = false)
+    cells_on_a = @cells.keys[0..3]
+    cells_on_b = @cells.keys[4..7]
+    cells_on_c = @cells.keys[8..11]
+    cells_on_d = @cells.keys[12..15]
+
+    require "pry"; binding.pry
     #apply the cell.render method to a range of cells
     # the range should reflect numbers ie A1-A4
-    
+
 
   end
 end
