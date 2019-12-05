@@ -67,5 +67,6 @@ class Board
     cells_on_d = @cells.keys[12..15].map { |coordinate|  @cells[coordinate].render(show_ships) }
 
     "  1 2 3 4 \n" + "A #{cells_on_a.join(" ")} \n" + "B #{cells_on_b.join(" ")} \n" + "C #{cells_on_c.join(" ")} \n" + "D #{cells_on_d.join(" ")} \n"
+
   end
 end
