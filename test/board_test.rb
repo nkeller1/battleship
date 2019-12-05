@@ -47,8 +47,8 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_grid_allignment
-    hash = {letters: [65, 65, 65], numbers: [1, 2, 3]}
-    assert_equal hash, @board.valid_grid_allignment(["A1", "A2", "A3"])
+    expected = {letters: [65, 65, 65], numbers: [1, 2, 3]}
+    assert_equal expected, @board.valid_grid_allignment(["A1", "A2", "A3"])
   end
 
   def test_consecutive_ship_placement
@@ -88,6 +88,14 @@ class BoardTest < Minitest::Test
     @board.place(@submarine, ["A1", "B1"])
 
     assert_equal false, @board.valid_placement?(@submarine, ["A1", "B1"])
+  end
+
+  def test_board_render_method
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    expected_computer_board = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected_player_board = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+    assert_equal expected_computer_board. @board.render
+    assert_equal expected_player_board, @board.render(true)
   end
 
 end

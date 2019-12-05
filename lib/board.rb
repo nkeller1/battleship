@@ -59,4 +59,9 @@ class Board
       @cells[coordinate].ship == nil
     end
   end
+
+  def render(player = false)
+    
+
+  end
 end
