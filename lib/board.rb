@@ -69,9 +69,9 @@ class Board
     # x =cells_on_a.map do |coordinate|
     #   @cells[coordinate].render
 
-    x = "  1 2 3 4 \nA #{cells_on_a} \nB#{cells_on_b} \nC#{cells_on_c} \nD#{cells_on_d} \n"
-    x
-    require "pry"; binding.pry
+    x = "  1 2 3 4 \n" + "A #{cells_on_a.join(" ")} \n" + "B #{cells_on_b.join(" ")} \n" + "C #{cells_on_c.join(" ")} \n" + "D #{cells_on_d.join(" ")} \n"
+   x
+    # require "pry"; binding.pry
     #find range of cells we are to work over
     #want to render each individual cell, using cell.render method
 
