@@ -59,4 +59,13 @@ class Board
       @cells[coordinate].ship == nil
     end
   end
+
+  def render(show_ships = false)
+    cells_on_a = @cells.keys[0..3].map { |coordinate|  @cells[coordinate].render(show_ships) }
+    cells_on_b = @cells.keys[4..7].map { |coordinate|  @cells[coordinate].render(show_ships) }
+    cells_on_c = @cells.keys[8..11].map { |coordinate|  @cells[coordinate].render(show_ships) }
+    cells_on_d = @cells.keys[12..15].map { |coordinate|  @cells[coordinate].render(show_ships) }
+
+    "  1 2 3 4 \n" + "A #{cells_on_a.join(" ")} \n" + "B #{cells_on_b.join(" ")} \n" + "C #{cells_on_c.join(" ")} \n" + "D #{cells_on_d.join(" ")} \n"
+  end
 end
