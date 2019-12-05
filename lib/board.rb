@@ -61,6 +61,8 @@ class Board
   end
 
   def render(player = false)
+    #apply the cell.render method to a range of cells
+    # the range should reflect numbers ie A1-A4
     
 
   end

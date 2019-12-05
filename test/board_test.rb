@@ -91,11 +91,11 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_render_method
-    @board.place(@cruiser, ["A1", "A2", "A3"])
-    expected_computer_board = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-    expected_player_board = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
-    assert_equal expected_computer_board. @board.render
-    assert_equal expected_player_board, @board.render(true)
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      expected_computer_board = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+      expected_player_board = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+      assert_equal expected_computer_board, @board.render
+      assert_equal expected_player_board, @board.render(true)
   end
 
 end
