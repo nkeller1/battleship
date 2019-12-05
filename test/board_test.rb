@@ -96,6 +96,10 @@ class BoardTest < Minitest::Test
       expected_player_board = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
       assert_equal expected_computer_board, @board.render
       assert_equal expected_player_board, @board.render(true)
+
+      board_with_miss = "  1 2 3 4 \nA S S S . \nB M . . . \nC . . . . \nD . . . . \n"
+      @board.cells["B1"].fire_upon
+      assert_equal board_with_miss, @board.render(true)
   end
 
 end
