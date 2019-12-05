@@ -28,16 +28,16 @@ class Cell
   end
 
   def render(player = false)
-      if player == true && @ship != nil && @fired_upon == false
-        "S"
-      elsif fired_upon? == true && @ship != nil && @ship.sunk? == true
-        "X"
-      elsif fired_upon? == true && @ship != nil && @ship.health >= 0
-        "H"
-      elsif fired_upon? == true && @ship == nil
-        "M"
-      else
-        "."
+    if player == true && @ship != nil && @fired_upon == false
+      "S"
+    elsif fired_upon? == true && @ship != nil && @ship.sunk? == true
+      "X"
+    elsif fired_upon? == true && @ship != nil && @ship.health >= 0
+      "H"
+    elsif fired_upon? == true && @ship == nil
+      "M"
+    else
+      "."
     end
   end
 

@@ -100,6 +100,15 @@ class BoardTest < Minitest::Test
       board_with_miss = "  1 2 3 4 \nA S S S . \nB M . . . \nC . . . . \nD . . . . \n"
       @board.cells["B1"].fire_upon
       assert_equal board_with_miss, @board.render(true)
+
+      board_with_hit = "  1 2 3 4 \nA H S S . \nB M . . . \nC . . . . \nD . . . . \n"
+      @board.cells["A1"].fire_upon
+      assert_equal board_with_hit, @board.render(true)
+
+      board_with_sunk = "  1 2 3 4 \nA X X X . \nB M . . . \nC . . . . \nD . . . . \n"
+      @board.cells["A2"].fire_upon
+      @board.cells["A3"].fire_upon
+      assert_equal board_with_sunk, @board.render(true)
   end
 
 end
