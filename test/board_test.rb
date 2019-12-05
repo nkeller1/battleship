@@ -63,9 +63,16 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_placement?(@submarine, ["C2", "D3"])
   end
 
-  # def test_place_ship_on_board
-  #
-  #   assert_equal [], @board.place_ship_on_board(@cruiser, [@board.cells["A1"], @board.cells["A2"], @board.cells["A3"]])
-  # end
+  def test_place_ship_on_board
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    cell_1 = @board.cells["A1"]
+    cell_2 = @board.cells["A2"]
+    cell_3 = @board.cells["A3"]
+
+    assert_equal @cruiser, cell_1.ship
+    assert_equal @cruiser, cell_1.ship
+    assert_equal @cruiser, cell_1.ship
+    assert_equal true, cell_3.ship == cell_2.ship
+  end
 
 end
