@@ -27,13 +27,14 @@ class Board
 
   def valid_placement?(ship, coordinates)
     return false unless coordinates.all? { |coordinate| valid_coordinate?(coordinate) }
-    ship_overlap_stopper(coordinates)
+    return false unless ship_overlap?(coordinates)
     return false if ship.length != coordinates.length
-    valid_grid = valid_grid_allignment(coordinates)
-    valid_grid[:letters].uniq.length == 1 && sequential?(valid_grid[:numbers])
+    valid_grid = valid_grid_allignment?(coordinates)
+    (valid_grid[:letters].uniq.length == 1 && sequential?(valid_grid[:numbers])) ||
+    (valid_grid[:numbers].uniq.length == 1 && sequential?(valid_grid[:letters]))
   end
 
-  def valid_grid_allignment(coordinates)
+  def valid_grid_allignment?(coordinates)
     letters = []
     numbers = []
     coordinates.each do |coordinate|
@@ -54,7 +55,7 @@ class Board
     end
   end
 
-  def ship_overlap_stopper(coordinates)
+  def ship_overlap?(coordinates)
     coordinates.all? do |coordinate|
       @cells[coordinate].ship == nil
     end
