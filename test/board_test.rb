@@ -29,7 +29,7 @@ class BoardTest < Minitest::Test
     assert_instance_of Cell, @board.cells.values.first
   end
 
-  def test_valid_coordinate
+  def test_valid_coordinate?
     assert_equal true, @board.valid_coordinate?("A1")
     assert_equal true, @board.valid_coordinate?("D4")
     assert_equal false, @board.valid_coordinate?("A5")
@@ -46,11 +46,11 @@ class BoardTest < Minitest::Test
     assert_equal true, @board.valid_placement?(@submarine, ["A1", "A2"])
   end
 
-  def test_valid_grid_allignment
+  def test_valid_grid_allignment?
     expected = {letters: [65, 65, 65], numbers: [1, 2, 3]}
     expected_2 = {letters: [65, 66, 67], numbers: [1, 1, 1]}
-    assert_equal expected, @board.valid_grid_allignment(["A1", "A2", "A3"])
-    assert_equal expected_2, @board.valid_grid_allignment(["A1", "B1", "C1"])
+    assert_equal expected, @board.valid_grid_allignment?(["A1", "A2", "A3"])
+    assert_equal expected_2, @board.valid_grid_allignment?(["A1", "B1", "C1"])
   end
 
   def test_consecutive_ship_placement
@@ -60,13 +60,12 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_placement?(@submarine, ["C1", "B1"])
   end
 
-  def test_non_diagonal_ship_placement
+  def test_other_cases_of_valid_placement?
+    #vertical ship placment
+    assert_equal true, @board.valid_placement?(@cruiser, ["A1", "B1", "C1"])
+    #diagonal ship placement
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "B2", "C3"])
     assert_equal false, @board.valid_placement?(@submarine, ["C2", "D3"])
-  end
-
-  def test_edge_cases_valid_placement?
-    assert_equal true, @board.valid_placement?(@cruiser, ["A1", "B1", "C1"])
   end
 
   def test_place_ship_on_board
@@ -82,14 +81,14 @@ class BoardTest < Minitest::Test
     assert_equal true, cell_2.ship == cell_1.ship
   end
 
-  def test_ship_overlap
+  def test_ship_overlap?
     @board.place(@cruiser, ["A1", "A2", "A3"])
     @board.place(@submarine, ["A1", "B1"])
-    assert_equal true, @board.ship_overlap_stopper(["D1", "D2"])
-    assert_equal false, @board.ship_overlap_stopper(["A1", "B1"])
+    assert_equal true, @board.ship_overlap?(["D1", "D2"])
+    assert_equal false, @board.ship_overlap?(["A1", "B1"])
   end
 
-  def test_ships_can_not_overlap
+  def test_ship_overlap_within_valid_palcement?
     @board.place(@cruiser, ["A1", "A2", "A3"])
     @board.place(@submarine, ["A1", "B1"])
 
