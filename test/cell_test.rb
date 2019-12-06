@@ -7,17 +7,15 @@ class CellTest < Minitest::Test
   def setup
     @cell = Cell.new("B4")
     @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
   end
 
   def test_it_exists
     assert_instance_of Cell, @cell
   end
 
-  def test_coordinate
+  def test_its_attributes
     assert_equal "B4", @cell.coordinate
-  end
-
-  def test_ship_attribute_of_self
     assert_nil @cell.ship
   end
 
@@ -28,12 +26,12 @@ class CellTest < Minitest::Test
   def test_place_ship_in_cell
     @cell.place_ship(@cruiser)
     assert_equal @cruiser, @cell.ship
-    assert_equal false, @cell.empty?
+    refute @cell.empty?
   end
 
   def test_fire_upon_and_fired_upon?
     @cell.place_ship(@cruiser)
-    assert_equal false, @cell.fired_upon?
+    refute @cell.fired_upon?
     @cell.fire_upon
     assert_equal 2, @cell.ship.health
     assert_equal true, @cell.fired_upon?

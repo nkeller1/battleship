@@ -48,7 +48,9 @@ class BoardTest < Minitest::Test
 
   def test_valid_grid_allignment
     expected = {letters: [65, 65, 65], numbers: [1, 2, 3]}
+    expected_2 = {letters: [65, 66, 67], numbers: [1, 1, 1]}
     assert_equal expected, @board.valid_grid_allignment(["A1", "A2", "A3"])
+    assert_equal expected_2, @board.valid_grid_allignment(["A1", "B1", "C1"])
   end
 
   def test_consecutive_ship_placement
@@ -61,6 +63,10 @@ class BoardTest < Minitest::Test
   def test_non_diagonal_ship_placement
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "B2", "C3"])
     assert_equal false, @board.valid_placement?(@submarine, ["C2", "D3"])
+  end
+
+  def test_edge_cases_valid_placement?
+    assert_equal true, @board.valid_placement?(@cruiser, ["A1", "B1", "C1"])
   end
 
   def test_place_ship_on_board
