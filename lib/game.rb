@@ -89,6 +89,7 @@ class Game
       display_computer_results
     end
     game_over
+    main_menu
   end
 
   def display_boards
@@ -144,5 +145,10 @@ class Game
   end
 
   def game_over
+    if @player_cruiser.sunk? && @player_submarine.sunk? == true
+      puts "The computer wins!"
+    elsif @computer_cruiser.sunk? && @computer_submarine.sunk? == true
+    puts "You Win!"
+  end
   end
 end
