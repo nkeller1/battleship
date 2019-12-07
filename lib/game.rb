@@ -48,8 +48,11 @@ class Game
     puts "Enter the coordinates for the Cruiser (3 spaces):"
     # require "pry"; binding.pry
     cruiser_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
-    @player_board.place(@player_cruiser, cruiser_placement)
-    puts @player_board.render(true)
+    if @player_board.valid_placement?(ship, cruiser_placement)
+      @player_board.place(@player_cruiser, cruiser_placement)
+      puts @player_board.render(true)
+    elsif @player_board.valid_placement?(ship, cruiser_placement)
+      puts "The coordinates you entered are invalid! Please try again"
     puts "Enter the coordinates for the Submarine (2 spaces):"
     submarine_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
     @player_board.place(@player_submarine, submarine_placement)
