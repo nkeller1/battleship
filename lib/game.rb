@@ -44,6 +44,24 @@ class Game
     setup
   end
 
+  def place_ship_player(ship)
+    puts "Enter the coordinates for the Cruiser (3 spaces):"
+    # require "pry"; binding.pry
+    cruiser_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
+    @player_board.place(@player_cruiser, cruiser_placement)
+    puts @player_board.render(true)
+    puts "Enter the coordinates for the Submarine (2 spaces):"
+    submarine_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
+    @player_board.place(@player_submarine, submarine_placement)
+    puts @player_board.render(true)
+  end
+
+  def setup_player
+    place_ship_player(@player_cruiser)
+    place_ship_player(@player_submarine)
+    # setup
+  end
+
   def setup
     puts "-" * 50
     puts "Your opponent has laid out its ships on the board."
@@ -52,14 +70,15 @@ class Game
     puts "-" * 50
     puts @player_board.render(true)
     puts "-" * 50
-    puts "Enter the coordinates for the Cruiser (3 spaces):"
-    cruiser_placement = gets.chomp.upcase
-    @player_board.place_ship_player(@player_cruiser)
-    puts @player_board.render(true)
-    puts "Enter the coordinates for the Submarine (2 spaces):"
-    submarine_placement = gets.chomp.upcase
-    @player_board.place_ship_player(@player_submarine)
-    puts @player_board.render(true)
+    # puts "Enter the coordinates for the Cruiser (3 spaces):"
+    setup_player
+    # cruiser_placement = gets.chomp.upcase
+    # @player_board.place_ship_player(@player_cruiser)
+    # puts @player_board.render(true)
+    # puts "Enter the coordinates for the Submarine (2 spaces):"
+    # submarine_placement = gets.chomp.upcase
+    # @player_board.place_ship_player(@player_submarine)
+    # puts @player_board.render(true)
   end
 
   #player needs a message to guide through set up process
