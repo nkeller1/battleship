@@ -45,26 +45,22 @@ class Game
   end
 
   def place_ship_player(ship)
-    puts "Enter the coordinates for the Cruiser (3 spaces):"
-    # require "pry"; binding.pry
     loop do
       cruiser_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
       if @player_board.valid_placement?(ship, cruiser_placement)
         @player_board.place(@player_cruiser, cruiser_placement)
         puts @player_board.render(true)
     break
-      elsif @player_board.valid_placement?(ship, cruiser_placement) == false 
+      elsif @player_board.valid_placement?(ship, cruiser_placement) == false
         puts "The coordinates you entered are invalid! Please try again."
       end
     end
-    puts "Enter the coordinates for the Submarine (2 spaces):"
-    submarine_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
-    @player_board.place(@player_submarine, submarine_placement)
-    puts @player_board.render(true)
   end
 
   def setup_player
+    puts "Enter the coordinates for the Cruiser (3 spaces):"
     place_ship_player(@player_cruiser)
+    puts "Enter the coordinates for the Submarine (2 spaces):"
     place_ship_player(@player_submarine)
     # setup
   end
@@ -77,15 +73,8 @@ class Game
     puts "-" * 50
     puts @player_board.render(true)
     puts "-" * 50
-    # puts "Enter the coordinates for the Cruiser (3 spaces):"
     setup_player
-    # cruiser_placement = gets.chomp.upcase
-    # @player_board.place_ship_player(@player_cruiser)
-    # puts @player_board.render(true)
-    # puts "Enter the coordinates for the Submarine (2 spaces):"
-    # submarine_placement = gets.chomp.upcase
-    # @player_board.place_ship_player(@player_submarine)
-    # puts @player_board.render(true)
+
   end
 
   #player needs a message to guide through set up process
