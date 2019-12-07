@@ -88,6 +88,7 @@ class Game
       display_player_results
       display_computer_results
     end
+    game_over
   end
 
   def display_boards
@@ -99,10 +100,10 @@ class Game
 
   def player_shoot
     puts "Enter the coordinates you want to fire upon!"
-    player_shot = gets.chomp.upcase
-    if @computer_board.valid_coordinate?(player_shot) == true && @computer_board.cells[player_shot].fired_upon? == false
-      @computer_board.cells[player_shot].fire_upon
-    elsif  @computer_board.cells[player_shot].fired_upon? == true
+    @player_shot = gets.chomp.upcase
+    if @computer_board.valid_coordinate?(@player_shot) == true && @computer_board.cells[@player_shot].fired_upon? == false
+      @computer_board.cells[@player_shot].fire_upon
+    elsif @computer_board.cells[@player_shot].fired_upon? == true
       puts "You have already fired upon this coordinate. Try again."
     else
       puts "Invalid input. Please enter a valid coordinate."
@@ -110,17 +111,38 @@ class Game
   end
 
   def computer_shoot
-    computer_shot = @player_board.cells.keys.sample
-    if @player_board.cells[computer_shot].fired_upon? == false
-      @player_board.cells[computer_shot].fire_upon
+    @computer_shot = @player_board.cells.keys.sample
+    if @player_board.cells[@computer_shot].fired_upon? == false
+      @player_board.cells[@computer_shot].fire_upon
     end
   end
 
   def display_player_results
-
+    if @computer_board.cells[@player_shot].render == "M"
+      puts "Your shot was a Miss"
+      puts "-" * 50
+    elsif @computer_board.cells[@player_shot].render == "H"
+      puts "Your shot was a Hit"
+      puts "-" * 50
+    elsif @computer_board.cells[@player_shot].render == "S"
+      puts "You sunk the computers ship"
+      puts "-" * 50
+    end
   end
 
   def display_computer_results
+    if @player_board.cells[@computer_shot].render == "M"
+      puts "The computers shot was a Miss"
+      puts "-" * 50
+    elsif @player_board.cells[@computer_shot].render == "H"
+      puts "The computers shot was a Hit"
+      puts "-" * 50
+    elsif @player_board.cells[@computer_shot].render == "S"
+      puts "The computer sunk your ship"
+      puts "-" * 50
+    end
+  end
 
+  def game_over
   end
 end
