@@ -80,6 +80,7 @@ class Game
       end
     end
   end
+
   def take_turn
     until @player_cruiser.sunk? && @player_submarine.sunk? == true || @computer_cruiser.sunk? && @computer_submarine.sunk? == true
       display_boards
@@ -110,7 +111,10 @@ class Game
   end
 
   def computer_shoot
-    @player_board.cells[@player_board.keys.sample].fire_upon
+    @player_board.cells[@player_board.cells.keys.sample].fire_upon
+    until @player_board.cells[@player_board.cells.keys.sample].fired_upon? == false
+      @player_board.cells[@player_board.cells.keys.sample].fire_upon
+    end
   end
   #player needs a message to guide through set up process
   # player needs to interact with terminal to place the two ships
