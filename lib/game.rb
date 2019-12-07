@@ -29,7 +29,7 @@ class Game
     end
   end
 
-  def place_ships_computer(ship)
+  def place_ship_computer(ship)
     coordinates = []
     coordinates = @computer_board.cells.keys.sample(ship.length)
     until @computer_board.valid_placement?(ship, coordinates)
@@ -39,11 +39,33 @@ class Game
   end
 
   def setup_computer
-    place_ships_computer(@computer_cruiser)
-    place_ships_computer(@computer_submarine)
+    place_ship_computer(@computer_cruiser)
+    place_ship_computer(@computer_submarine)
     setup
   end
 
   def setup
+    puts "-" * 50
+    puts "Your opponent has laid out its ships on the board."
+    puts "You now need to lay out your two ships."
+    puts "The Cruiser is three units long and the Submarine is two units long."
+    puts "-" * 50
+    puts @player_board.render(true)
+    puts "-" * 50
+    puts "Enter the coordinates for the Cruiser (3 spaces):"
+    cruiser_placement = gets.chomp.upcase
+    @player_board.place_ship_player(@player_cruiser)
+    puts @player_board.render(true)
+    puts "Enter the coordinates for the Submarine (2 spaces):"
+    submarine_placement = gets.chomp.upcase
+    @player_board.place_ship_player(@player_submarine)
+    puts @player_board.render(true)
+  end
+
+  #player needs a message to guide through set up process
+  # player needs to interact with terminal to place the two ships
+  #board needs to render true each time a ship is placed.
+  # the player and computer will take turns shooting at the others boa
+
 
 end

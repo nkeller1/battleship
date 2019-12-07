@@ -45,11 +45,11 @@ class GameTest < Minitest::Test
   end
 
   def test_computer_generates_valid_ship_placement
-    @game.place_ships_computer(@computer_cruiser)
-    assert_equal true, @player_board.valid_placement?(@computer_cruiser, @game.place_ships_computer(@computer_cruiser))
+    @game.place_ship_computer(@computer_cruiser)
+    assert_equal true, @player_board.valid_placement?(@computer_cruiser, @game.place_ship_computer(@computer_cruiser))
 
-    @game.place_ships_computer(@computer_submarine)
-    assert_equal true, @player_board.valid_placement?(@computer_submarine, @game.place_ships_computer(@computer_submarine))
+    @game.place_ship_computer(@computer_submarine)
+    assert_equal true, @player_board.valid_placement?(@computer_submarine, @game.place_ship_computer(@computer_submarine))
   end
 
   def test_computer_can_place_ships
