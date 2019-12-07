@@ -83,6 +83,8 @@ class Game
   def take_turn
     until @player_cruiser.sunk? && @player_submarine.sunk? == true || @computer_cruiser.sunk? && @computer_submarine.sunk? == true
       display_boards
+      player_shoot
+      computer_shoot
     end
 
 
@@ -93,7 +95,22 @@ class Game
     puts @computer_board.render
     puts "==============PLAYER BOARD=============="
     puts @player_board.render(true)
+  end
 
+  def player_shoot
+    puts "Enter the coordinates you want to fire upon!"
+    player_shot = gets.chomp.upcase
+    if @computer_board.cells[player_shot].fired_upon? == false
+      @computer_board.cells[player_shot].fire_upon
+    elsif @computer_board.cells[player_shot].fired_upon? == true
+      puts "Invalid. You have already fired upon this coordinate! Try again."
+    else
+      puts "Invalid input. Please fire upon a valid coordinate."
+    end
+  end
+
+  def computer_shoot
+    @player_board.cells[@player_board.keys.sample].fire_upon
   end
   #player needs a message to guide through set up process
   # player needs to interact with terminal to place the two ships
