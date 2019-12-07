@@ -31,7 +31,6 @@ class Game
 
   def place_ship_computer(ship)
     coordinates = []
-    # coordinates = @computer_board.cells.keys.sample(ship.length)
     until @computer_board.valid_placement?(ship, coordinates)
       coordinates = @computer_board.cells.keys.sample(ship.length)
     end
@@ -86,9 +85,9 @@ class Game
       display_boards
       player_shoot
       computer_shoot
+      display_player_results
+      display_computer_results
     end
-
-
   end
 
   def display_boards
@@ -106,7 +105,7 @@ class Game
     elsif  @computer_board.cells[player_shot].fired_upon? == true
       puts "You have already fired upon this coordinate. Try again."
     else
-      puts "Invalid input. Please fire upon a valid coordinate."
+      puts "Invalid input. Please enter a valid coordinate."
     end
   end
 
@@ -115,5 +114,13 @@ class Game
     if @player_board.cells[computer_shot].fired_upon? == false
       @player_board.cells[computer_shot].fire_upon
     end
+  end
+
+  def display_player_results
+
+  end
+
+  def display_computer_results
+
   end
 end
