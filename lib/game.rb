@@ -101,25 +101,19 @@ class Game
   def player_shoot
     puts "Enter the coordinates you want to fire upon!"
     player_shot = gets.chomp.upcase
-    if @computer_board.cells[player_shot].fired_upon? == false
+    if @computer_board.valid_coordinate?(player_shot) == true && @computer_board.cells[player_shot].fired_upon? == false
       @computer_board.cells[player_shot].fire_upon
-    elsif @computer_board.cells[player_shot].fired_upon? == true
-      puts "Invalid. You have already fired upon this coordinate! Try again."
+    elsif  @computer_board.cells[player_shot].fired_upon? == true
+      puts "You have already fired upon this coordinate. Try again."
     else
       puts "Invalid input. Please fire upon a valid coordinate."
     end
   end
 
   def computer_shoot
-    @player_board.cells[@player_board.cells.keys.sample].fire_upon
-    until @player_board.cells[@player_board.cells.keys.sample].fired_upon? == false
-      @player_board.cells[@player_board.cells.keys.sample].fire_upon
+    computer_shot = @player_board.cells.keys.sample
+    if @player_board.cells[computer_shot].fired_upon? == false
+      @player_board.cells[computer_shot].fire_upon
     end
   end
-  #player needs a message to guide through set up process
-  # player needs to interact with terminal to place the two ships
-  #board needs to render true each time a ship is placed.
-  # the player and computer will take turns shooting at the others boa
-
-
 end
