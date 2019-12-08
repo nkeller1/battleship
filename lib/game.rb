@@ -134,13 +134,10 @@ class Game
   def display_computer_results
     if @player_board.cells[@computer_shot].render == "M"
       puts "The computers shot was a Miss"
-      puts "-" * 50
     elsif @player_board.cells[@computer_shot].render == "H"
       puts "The computers shot was a Hit"
-      puts "-" * 50
     elsif @player_board.cells[@computer_shot].render == "S"
       puts "The computer sunk your ship"
-      puts "-" * 50
     end
   end
 
