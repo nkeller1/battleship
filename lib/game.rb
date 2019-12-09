@@ -89,6 +89,7 @@ class Game
       display_computer_results
     end
     game_over
+    initialize
     main_menu
   end
 
