@@ -89,6 +89,7 @@ class Game
       display_computer_results
     end
     game_over
+    initialize
     main_menu
   end
 
@@ -100,15 +101,18 @@ class Game
   end
 
   def player_shoot
-    puts "Enter the coordinates you want to fire upon!"
-    @player_shot = gets.chomp.upcase
-    if @computer_board.valid_coordinate?(@player_shot) == true && @computer_board.cells[@player_shot].fired_upon? == false
-      @computer_board.cells[@player_shot].fire_upon
-    elsif @computer_board.cells[@player_shot].fired_upon? == true
-      puts "You have already fired upon this coordinate. Try again."
-    else
-      puts "Invalid input. Please enter a valid coordinate."
-    end
+     loop do
+       puts "Enter the coordinates you want to fire upon!"
+       @player_shot = gets.chomp.upcase
+      if @computer_board.valid_coordinate?(@player_shot) == true && @computer_board.cells[@player_shot].fired_upon? == false
+        @computer_board.cells[@player_shot].fire_upon
+        break
+      elsif @computer_board.valid_coordinate?(@player_shot) == true && @computer_board.cells[@player_shot].fired_upon? == true
+        puts "You have already fired upon this coordinate. Try again."
+      else
+        puts "Invalid input. Please enter a valid coordinate."
+      end
+     end
   end
 
   def computer_shoot
