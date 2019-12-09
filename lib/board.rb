@@ -30,8 +30,8 @@ class Board
     return false unless ship_overlap?(coordinates)
     return false if ship.length != coordinates.length
     valid_grid = valid_grid_allignment?(coordinates)
-    (valid_grid[:letters].uniq.length == 1 && sequential?(valid_grid[:numbers])) ||
-    (valid_grid[:numbers].uniq.length == 1 && sequential?(valid_grid[:letters]))
+    (valid_grid[:letters].uniq.length == 1 && sequential?(valid_grid[:numbers].sort)) ||
+    (valid_grid[:numbers].uniq.length == 1 && sequential?(valid_grid[:letters].sort))
   end
 
   def valid_grid_allignment?(coordinates)
