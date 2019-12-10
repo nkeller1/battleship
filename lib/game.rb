@@ -83,8 +83,8 @@ class Game
   def take_turn
     until @player_cruiser.sunk? && @player_submarine.sunk? == true || @computer_cruiser.sunk? && @computer_submarine.sunk? == true
       display_boards
-      player_shoot
       computer_shoot
+      player_shoot
       display_player_results
       display_computer_results
     end
@@ -120,8 +120,6 @@ class Game
     if @player_board.cells[@computer_shot].fired_upon? == false
        # @player_board.valid_coordinate?(@computer_shot)
       @player_board.cells[@computer_shot].fire_upon
-    elsif
-      @computer_shot = @player_board.cells.keys.sample
     end
   end
 
