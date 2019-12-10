@@ -57,9 +57,9 @@ class Game
   end
 
   def setup_player
-    puts "Enter the coordinates for the Cruiser (3 spaces):"
+    puts "Enter the coordinates for the Cruiser (3 coordinates seperated by a space or a comma):"
     place_ship_player(@player_cruiser)
-    puts "Enter the coordinates for the Submarine (2 spaces):"
+    puts "Enter the coordinates for the Submarine (2 coordinates seperated by a space or a comma):"
     place_ship_player(@player_submarine)
     puts "-" * 50
     puts "Setup complete. Play Battleship!!"
@@ -103,7 +103,7 @@ class Game
   def player_shoot
     loop do
        puts "Enter the coordinates you want to fire upon!"
-       @player_shot = gets.chomp.upcase
+       @player_shot = gets.chomp.upcase.gsub(" ", "")
       if @computer_board.valid_coordinate?(@player_shot) == true && @computer_board.cells[@player_shot].fired_upon? == false
         @computer_board.cells[@player_shot].fire_upon
         break
@@ -118,7 +118,10 @@ class Game
   def computer_shoot
     @computer_shot = @player_board.cells.keys.sample
     if @player_board.cells[@computer_shot].fired_upon? == false
+       # @player_board.valid_coordinate?(@computer_shot)
       @player_board.cells[@computer_shot].fire_upon
+    elsif
+      @computer_shot = @player_board.cells.keys.sample
     end
   end
 
@@ -129,7 +132,7 @@ class Game
     elsif @computer_board.cells[@player_shot].render == "H"
       puts "Your shot was a Hit"
       puts "-" * 50
-    elsif @computer_board.cells[@player_shot].render == "S"
+    elsif @computer_board.cells[@player_shot].render == "X"
       puts "You sunk the computers ship"
       puts "-" * 50
     end
@@ -140,7 +143,7 @@ class Game
       puts "The computers shot was a Miss"
     elsif @player_board.cells[@computer_shot].render == "H"
       puts "The computers shot was a Hit"
-    elsif @player_board.cells[@computer_shot].render == "S"
+    elsif @player_board.cells[@computer_shot].render == "X"
       puts "The computer sunk your ship"
     end
   end
