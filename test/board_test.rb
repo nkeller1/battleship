@@ -1,8 +1,7 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/ship'
-require './lib/cell'
-require './lib/board'
+require_relative 'test_helper'
+require_relative '../lib/ship'
+require_relative '../lib/cell'
+require_relative '../lib/board'
 
 class BoardTest < Minitest::Test
 
