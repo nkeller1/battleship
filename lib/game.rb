@@ -101,7 +101,7 @@ class Game
   end
 
   def player_shoot
-     loop do
+    loop do
        puts "Enter the coordinates you want to fire upon!"
        @player_shot = gets.chomp.upcase
       if @computer_board.valid_coordinate?(@player_shot) == true && @computer_board.cells[@player_shot].fired_upon? == false
@@ -112,7 +112,7 @@ class Game
       else
         puts "Invalid input. Please enter a valid coordinate."
       end
-     end
+    end
   end
 
   def computer_shoot
@@ -149,7 +149,7 @@ class Game
     if @player_cruiser.sunk? && @player_submarine.sunk? == true
       puts "The computer wins!"
     elsif @computer_cruiser.sunk? && @computer_submarine.sunk? == true
-    puts "You Win!"
-  end
+      puts "You Win!"
+    end
   end
 end
