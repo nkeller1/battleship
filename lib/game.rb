@@ -12,6 +12,7 @@ class Game
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
+    @computer_array = [@player_board.cells.keys].flatten
   end
 
   def main_menu
@@ -116,11 +117,10 @@ class Game
   end
 
   def computer_shoot
-    discard = []
-    computer_sample = [@player_board.cells.keys].flatten
+    computer_sample = @computer_array
     @computer_shot = computer_sample.sample
+    computer_sample.delete(@computer_shot)
     @player_board.cells[@computer_shot].fire_upon
-    discard << @computer_shot
   end
 
   def display_player_results
