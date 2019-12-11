@@ -58,6 +58,4 @@ class GameTest < Minitest::Test
     @computer_board.place(@computer_submarine, ["B1", "B2"])
     assert_equal 5, @computer_board.render(true).count("S")
   end
-
-
 end

@@ -130,7 +130,8 @@ class Game
     elsif @computer_board.cells[@player_shot].render == "H"
       puts "Your shot was a Hit"
       puts "-" * 50
-    elsif @computer_board.cells[@player_shot].render == "X"
+    elsif @computer_board.cells[@player_shot].render == "X" &&
+      (@computer_cruiser.sunk? == true || @computer_submarine.sunk? == true)
       puts "You sunk the computers ship"
       puts "-" * 50
     end
@@ -144,6 +145,7 @@ class Game
       puts "The computers shot was a Hit"
       puts "The computer shot coordinate #{@computer_shot}"
     elsif @player_board.cells[@computer_shot].render == "X"
+      (@player_cruiser.sunk? == true || @player_submarine.sunk? == true)
       puts "The computer sunk your ship"
       puts "The computer shot coordinate #{@computer_shot}"
     end
