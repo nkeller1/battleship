@@ -12,6 +12,7 @@ class Game
     @computer_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
+    @computer_array = [@player_board.cells.keys].flatten
   end
 
   def main_menu
@@ -57,9 +58,9 @@ class Game
   end
 
   def setup_player
-    puts "Enter the coordinates for the Cruiser (3 spaces):"
+    puts "Enter the coordinates for the Cruiser (3 coordinates seperated by a space or a comma):"
     place_ship_player(@player_cruiser)
-    puts "Enter the coordinates for the Submarine (2 spaces):"
+    puts "Enter the coordinates for the Submarine (2 coordinates seperated by a space or a comma):"
     place_ship_player(@player_submarine)
     puts "-" * 50
     puts "Setup complete. Play Battleship!!"
@@ -83,12 +84,13 @@ class Game
   def take_turn
     until @player_cruiser.sunk? && @player_submarine.sunk? == true || @computer_cruiser.sunk? && @computer_submarine.sunk? == true
       display_boards
-      player_shoot
       computer_shoot
+      player_shoot
       display_player_results
       display_computer_results
     end
     game_over
+    initialize
     main_menu
   end
 
@@ -100,22 +102,25 @@ class Game
   end
 
   def player_shoot
-    puts "Enter the coordinates you want to fire upon!"
-    @player_shot = gets.chomp.upcase
-    if @computer_board.valid_coordinate?(@player_shot) == true && @computer_board.cells[@player_shot].fired_upon? == false
-      @computer_board.cells[@player_shot].fire_upon
-    elsif @computer_board.cells[@player_shot].fired_upon? == true
-      puts "You have already fired upon this coordinate. Try again."
-    else
-      puts "Invalid input. Please enter a valid coordinate."
+    loop do
+       puts "Enter the coordinates you want to fire upon!"
+       @player_shot = gets.chomp.upcase.gsub(" ", "")
+      if @computer_board.valid_coordinate?(@player_shot) == true && @computer_board.cells[@player_shot].fired_upon? == false
+        @computer_board.cells[@player_shot].fire_upon
+        break
+      elsif @computer_board.valid_coordinate?(@player_shot) == true && @computer_board.cells[@player_shot].fired_upon? == true
+        puts "You have already fired upon this coordinate. Try again."
+      else
+        puts "Invalid input. Please enter a valid coordinate."
+      end
     end
   end
 
   def computer_shoot
-    @computer_shot = @player_board.cells.keys.sample
-    if @player_board.cells[@computer_shot].fired_upon? == false
-      @player_board.cells[@computer_shot].fire_upon
-    end
+    computer_sample = @computer_array
+    @computer_shot = computer_sample.sample
+    computer_sample.delete(@computer_shot)
+    @player_board.cells[@computer_shot].fire_upon
   end
 
   def display_player_results
@@ -125,7 +130,8 @@ class Game
     elsif @computer_board.cells[@player_shot].render == "H"
       puts "Your shot was a Hit"
       puts "-" * 50
-    elsif @computer_board.cells[@player_shot].render == "S"
+    elsif @computer_board.cells[@player_shot].render == "X" &&
+      (@computer_cruiser.sunk? == true || @computer_submarine.sunk? == true)
       puts "You sunk the computers ship"
       puts "-" * 50
     end
@@ -134,10 +140,14 @@ class Game
   def display_computer_results
     if @player_board.cells[@computer_shot].render == "M"
       puts "The computers shot was a Miss"
+      puts "The computer shot coordinate #{@computer_shot}"
     elsif @player_board.cells[@computer_shot].render == "H"
       puts "The computers shot was a Hit"
-    elsif @player_board.cells[@computer_shot].render == "S"
+      puts "The computer shot coordinate #{@computer_shot}"
+    elsif @player_board.cells[@computer_shot].render == "X"
+      (@player_cruiser.sunk? == true || @player_submarine.sunk? == true)
       puts "The computer sunk your ship"
+      puts "The computer shot coordinate #{@computer_shot}"
     end
   end
 
@@ -145,7 +155,7 @@ class Game
     if @player_cruiser.sunk? && @player_submarine.sunk? == true
       puts "The computer wins!"
     elsif @computer_cruiser.sunk? && @computer_submarine.sunk? == true
-    puts "You Win!"
-  end
+      puts "You Win!"
+    end
   end
 end

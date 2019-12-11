@@ -1,7 +1,6 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/ship'
-require './lib/cell'
+require_relative 'test_helper'
+require_relative '../lib/ship'
+require_relative '../lib/cell'
 
 class CellTest < Minitest::Test
   def setup

@@ -1,8 +1,7 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/ship'
-require './lib/cell'
-require './lib/board'
+require_relative 'test_helper'
+require_relative '../lib/ship'
+require_relative '../lib/cell'
+require_relative '../lib/board'
 
 class BoardTest < Minitest::Test
 
@@ -56,8 +55,8 @@ class BoardTest < Minitest::Test
   def test_consecutive_ship_placement
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
     assert_equal false, @board.valid_placement?(@submarine, ["A1", "C1"])
-    assert_equal false, @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
-    assert_equal false, @board.valid_placement?(@submarine, ["C1", "B1"])
+    assert_equal true, @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
+    assert_equal true, @board.valid_placement?(@submarine, ["C1", "B1"])
   end
 
   def test_other_cases_of_valid_placement?
