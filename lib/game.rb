@@ -116,11 +116,11 @@ class Game
   end
 
   def computer_shoot
-    @computer_shot = @player_board.cells.keys.sample
-    if @player_board.cells[@computer_shot].fired_upon? == false
-       # @player_board.valid_coordinate?(@computer_shot)
-      @player_board.cells[@computer_shot].fire_upon
-    end
+    discard = []
+    computer_sample = [@player_board.cells.keys].flatten
+    @computer_shot = computer_sample.sample
+    @player_board.cells[@computer_shot].fire_upon
+    discard << @computer_shot
   end
 
   def display_player_results
@@ -139,10 +139,13 @@ class Game
   def display_computer_results
     if @player_board.cells[@computer_shot].render == "M"
       puts "The computers shot was a Miss"
+      puts "The computer shot coordinate #{@computer_shot}"
     elsif @player_board.cells[@computer_shot].render == "H"
       puts "The computers shot was a Hit"
+      puts "The computer shot coordinate #{@computer_shot}"
     elsif @player_board.cells[@computer_shot].render == "X"
       puts "The computer sunk your ship"
+      puts "The computer shot coordinate #{@computer_shot}"
     end
   end
 

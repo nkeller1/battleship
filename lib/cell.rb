@@ -30,11 +30,11 @@ class Cell
   def render(player = false)
     if player == true && @ship != nil && @fired_upon == false
       "S"
-    elsif @fired_upon == true && @ship != nil && @ship.health == 0
+    elsif @ship != nil && @ship.health == 0 && @fired_upon == true
       "X"
-    elsif @fired_upon == true && @ship != nil && @ship.health >= 0
+    elsif @ship != nil && @ship.health > 0 && @fired_upon == true
       "H"
-    elsif @fired_upon == true && @ship == nil
+    elsif @ship == nil && @fired_upon == true
       "M"
     else
       "."
