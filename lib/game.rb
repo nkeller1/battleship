@@ -72,7 +72,7 @@ class Game
     loop do
       ship_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
       if @player_board.valid_placement?(ship, ship_placement)
-        @player_board.place(@player_cruiser, ship_placement)
+        @player_board.place(ship, ship_placement)
         puts @player_board.render(true)
         break
       elsif @player_board.valid_placement?(ship, ship_placement) == false
@@ -144,7 +144,7 @@ class Game
     elsif @player_board.cells[@computer_shot].render == "H"
       puts "The computers shot was a Hit"
       puts "The computer shot coordinate #{@computer_shot}"
-    elsif @player_board.cells[@computer_shot].render == "X"
+    elsif @player_board.cells[@computer_shot].render == "X" &&
       (@player_cruiser.sunk? == true || @player_submarine.sunk? == true)
       puts "The computer sunk your ship"
       puts "The computer shot coordinate #{@computer_shot}"
